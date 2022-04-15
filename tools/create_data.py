@@ -2,6 +2,7 @@ import argparse
 from os import path as osp
 
 from tools.data_converter import indoor_converter as indoor
+from tools.data_converter import indoor_converter_custom as indoor_custom
 from tools.data_converter import kitti_converter as kitti
 from tools.data_converter import lyft_converter as lyft_converter
 from tools.data_converter import nuscenes_converter as nuscenes_converter
@@ -160,6 +161,22 @@ def sunrgbd_data_prep(root_path, info_prefix, out_dir, workers):
         root_path, info_prefix, out_dir, workers=workers)
 
 
+def sunrgbd_wsemantic_feat_data_prep(root_path, info_prefix, out_dir, workers):
+    """Prepare the info file for sunrgbd dataset.
+
+    Args:
+        root_path (str): Path of dataset root.
+        info_prefix (str): The prefix of info filenames.
+        out_dir (str): Output directory of the generated info file.
+        workers (int): Number of threads to be used.
+    """
+    indoor_custom.create_indoor_info_file(
+        root_path, info_prefix, out_dir, workers=workers)
+
+
+
+
+
 def waymo_data_prep(root_path,
                     info_prefix,
                     version,
@@ -306,6 +323,12 @@ if __name__ == '__main__':
             workers=args.workers)
     elif args.dataset == 'sunrgbd':
         sunrgbd_data_prep(
+            root_path=args.root_path,
+            info_prefix=args.extra_tag,
+            out_dir=args.out_dir,
+            workers=args.workers)
+    elif args.dataset == 'sunrgbd-feat':
+        sunrgbd_wsemantic_feat_data_prep(
             root_path=args.root_path,
             info_prefix=args.extra_tag,
             out_dir=args.out_dir,
