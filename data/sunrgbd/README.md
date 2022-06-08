@@ -31,6 +31,15 @@ NOTE: If you would like to play around with [ImVoteNet](../../configs/imvotenet/
 python tools/create_data.py sunrgbd --root-path ./data/sunrgbd  --out-dir ./data/sunrgbd --extra-tag sunrgbd
 ```
 
+Command to create data with features
+
+```bash
+python tools/create_data.py sunrgbd-feat --root-path ./data/sunrgbd  --out-dir ./data/sunrgbd --extra-tag sunrgbd-expe_ID-features --feat_dir path-to-features
+```
+
+
+
+
 The directory structure after pre-processing should be as below
 
 ```
